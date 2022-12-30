@@ -44,7 +44,8 @@ final class PitchTap {
         didReceiveAudio()
 
         if tracker == nil {
-            tracker = PitchTracker(sampleRate: Int32(buffer.format.sampleRate))
+            // swiftlint:disable:next force_try - Should only be using safe values
+            tracker = try! PitchTracker(sampleRate: buffer.format.sampleRate)
         }
 
         if let pitch = tracker?.getPitch(from: buffer) {
